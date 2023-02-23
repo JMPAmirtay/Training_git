@@ -82,35 +82,9 @@
 	    <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="dlabnav">
-            <div class="dlabnav-scroll">
-				<ul class="metismenu" id="menu">
-					</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-025-dashboard"></i>
-							<span class="nav-text">Редактировать</span>
-						</a>
-                        <ul aria-expanded="false">
-							<li><a href="index.php">Новости</a></li>
-							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Факультеты</a>
-                                <ul aria-expanded="false">
-                                <?php
-                                    $facultys = mysqli_query($connect, "SELECT * FROM `faculty`");
-                                    $facultys = mysqli_fetch_all($facultys);
-                                    foreach($facultys as $faculty){
-                                        $name = $faculty[1];
-										$id = $faculty[0];
-                                        echo "<li><a href= 'faculty.php?id=$id' >$name</a></li>";
-                                      }
-                            	?>
-                                </ul>
-						</ul>
-
-                    </li>
-                    </li>
-                </ul>
-			</div>
-        </div>
+        <?php
+			require_once("sidebar.php")
+		?>
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -142,12 +116,26 @@
                                         </thead>
                                         <tbody>
 											<?php 
+											$arr = [
+												'января',
+												'февраля',
+												'марта',
+												'апреля',
+												'мая',
+												'июня',
+												'июля',
+												'августа',
+												'сентября',
+												'октября',
+												'ноября',
+												'декабря'
+											  ];
         									  foreach ($news as $arqument) {
         									      $id = $arqument[0];
         									      $title = $arqument[1];
         									      $description = $arqument[2];
 												  $date = strtotime($arqument[4]);
-												  $date = date("d", $date);
+												  $date = date("d", $date).' '.$arr[date("n", $date)-1].' '.date("Y", $date);
         									      $image = $arqument[6];
         									      $views = $arqument[9];
         									      $status = $arqument[11];
