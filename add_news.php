@@ -102,23 +102,23 @@
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <form action="vendor_news/update_news.php" method="post">
+                                    <form action="vendor_news/add_news.php" method="post">
                                     	<input type="hidden" name="id" value="<?= $news['id']?>">
                                         <div class="mb-3 row">
                                         	<label for="title">Заголовок:</label>
-                                            <textarea class="form-control" rows="4" id="title" name="title"><?= $news['Title']?></textarea>
+                                            <textarea class="form-control" rows="4" id="title" name="title"></textarea>
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="description">Описание:</label>
-                                            <textarea class="form-control" rows="4" id="description" name="description"><?= $news['Description']?></textarea>
+                                            <textarea class="form-control" rows="4" id="description" name="description"></textarea>
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="text">Текст:</label>
-                                            <textarea class="form-control" rows="4" id="text" name="text"><?= $news['Text']?></textarea>
+                                            <textarea class="form-control" rows="4" id="text" name="text"></textarea>
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="pubdate">Дата публикации:</label>
-                                            <input type="date" class="datepicker-default form-control" id="pubdate" name="pubdate" value="<?= $news['Publication Date']?>">
+                                            <input type="date" class="datepicker-default form-control" id="pubdate" name="pubdate">
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="author">Автор:</label>
@@ -145,19 +145,19 @@
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="tags">Теги:</label>
-                                            <textarea class="form-control" rows="4" id="tags" name="tags"><?= $news['Tags']?></textarea>
+                                            <textarea class="form-control" rows="4" id="tags" name="tags"></textarea>
                                         </div>
                                         <div class="mb-3 row">
                                         	<label for="status">Статус:</label>
                                             <select class="nice-select form-control wide" id="status" name="status">
-    											<option value="draft" <?php if ($news['Status'] == "draft") echo "selected";?>>Черновик</option>
-    											<option value="published" <?php if ($news['Status'] == "published") echo "selected";?>>Опубликован</option>
-    											<option value="archived" <?php if ($news['Status'] == "archived") echo "selected";?>>Архивирован</option>
+    											<option value="draft">Черновик</option>
+    											<option value="published">Опубликован</option>
+    											<option value="archived">Архивирован</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 row">
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Редактировать</button>
+                                                <button type="submit" class="btn btn-primary">Добавить</button>
                                             </div>
                                         </div>
                                     </form>

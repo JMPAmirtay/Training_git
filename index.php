@@ -68,7 +68,7 @@
 								</div>
 							</li>
                             <li class="nav-item">
-								<a href="javascript:void(0);" class="btn btn-primary d-sm-inline-block d-none">Добавить</a>
+								<a href="add_news.php" class="btn btn-primary d-sm-inline-block d-none">Добавить</a>
 							</li>
                         </ul>
                     </div>
