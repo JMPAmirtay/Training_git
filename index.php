@@ -107,42 +107,82 @@
         <!--**********************************
             Content body start
         ***********************************-->
+
+        <?php 
+        	$news = mysqli_query($connect, "SELECT * FROM `news`");
+        	$news = mysqli_fetch_all($news);
+         ?>
+
 		<div class="content-body">
 			<div class="container-fluid">
 					<div class="row">
-						<?php 
-        				  $news = mysqli_query($connect, "SELECT * FROM `news`");
-        				  $news = mysqli_fetch_all($news);
-        				  foreach ($news as $arqument) {
-        				      $id = $arqument[0];
-        				      $title = $arqument[1];
-        				      $description = $arqument[2];
-        				      $date = $arqument[4];
-        				      $image = $arqument[6];
-        				      $views = $arqument[9];
-        				?>
-						<div class="col-xl-6">
-	                        <div class="card">
-	                            <img class="card-img-top img-fluid" src="./img_archive/<?= $image ?>" alt="Card image cap">
-	                            <div class="card-header">
-	                                <h5 class="card-title"><?= $title ?></h5>
-	                            </div>
-	                            <div class="card-body">
-	                                <p class="card-text"><?= $description ?></p>
-	                            </div>
-	                            <div class="card-footer d-sm-flex justify-content-between align-items-center">
-                                	<div class="card-footer-link mb-4 mb-sm-0">
-                                	    <p class="card-text text-dark d-inline"><?= $date?></p>
-                                	</div>
-	
-                                	<a href="update_news.php?id=<?= $id ?>" class="btn btn-primary">Редактировать</a>
-                            	</div>
-	                        </div>
-	                    </div>
-	                    <?php
-        				  }
-        				?>
-                      </div>
+					<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th><strong>Заголовок</strong></th>
+                                                <th><strong>Дата</strong></th>
+                                                <th><strong>Статус</strong></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											<?php 
+        									  foreach ($news as $arqument) {
+        									      $id = $arqument[0];
+        									      $title = $arqument[1];
+        									      $description = $arqument[2];
+												  $date = $arqument[4];
+        									      $image = $arqument[6];
+        									      $views = $arqument[9];
+        									      $status = $arqument[11];
+        									?>
+                                            <tr>
+                                                <td><?= $title?></td>
+                                                <td><?= $date?></td>
+                                                <td><span class="badge light 
+                                                	<?php 
+                                                	if ($status == "published") {
+                                                		echo "badge-success";
+                                                	} elseif ($status == "draft") {
+                                                		echo "badge-warning";
+                                                	} elseif ($status == "archived") {
+                                                		echo "badge-danger";
+                                                	} ?>
+                                                	"><?= $status?></span></td>
+                                                <td>
+													<div class="dropdown">
+														<button type="button" class="btn 
+														<?php 
+                                                			if ($status == "published") {
+                                                				echo "btn-success";
+                                                			} elseif ($status == "draft") {
+                                                				echo "btn-warning";
+                                                			} elseif ($status == "archived") {
+                                                				echo "btn-danger";
+                                                			} ?>
+														light sharp" data-bs-toggle="dropdown">
+															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="update_news.php?id=<?= $id ?>">Редактировать</a>
+															<a class="dropdown-item" href="vendor_news/delete_news.php?id=<?= $id?>">Удалить</a>
+														</div>
+													</div>
+												</td>
+                                            </tr>
+	                    					<?php
+        									  }
+        									?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
