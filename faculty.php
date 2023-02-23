@@ -103,7 +103,6 @@
                                         $name = $faculty[1];
 										$id = $faculty[0];
                                         echo "<li><a href= 'faculty.php?id=$id' >$name</a></li>";
-
                                       }
                             	?>
                                 </ul>

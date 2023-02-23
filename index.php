@@ -92,7 +92,18 @@
 						</a>
                         <ul aria-expanded="false">
 							<li><a href="index.php">Новости</a></li>
-							<li><a href="index-2.html">Факультеты</a></li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Факультеты</a>
+                                <ul aria-expanded="false">
+                                <?php
+                                    $facultys = mysqli_query($connect, "SELECT * FROM `faculty`");
+                                    $facultys = mysqli_fetch_all($facultys);
+                                    foreach($facultys as $faculty){
+                                        $name = $faculty[1];
+										$id = $faculty[0];
+                                        echo "<li><a href= 'faculty.php?id=$id' >$name</a></li>";
+                                      }
+                            	?>
+                                </ul>
 						</ul>
 
                     </li>
@@ -135,7 +146,8 @@
         									      $id = $arqument[0];
         									      $title = $arqument[1];
         									      $description = $arqument[2];
-												  $date = $arqument[4];
+												  $date = strtotime($arqument[4]);
+												  $date = date("d", $date);
         									      $image = $arqument[6];
         									      $views = $arqument[9];
         									      $status = $arqument[11];
