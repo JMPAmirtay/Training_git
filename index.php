@@ -139,32 +139,24 @@
         									      $image = $arqument[6];
         									      $views = $arqument[9];
         									      $status = $arqument[11];
+												  if ($status == "published") {
+													$status_color = "success";
+													$status_name = "Опубликован";
+												} elseif ($status == "draft") {
+													$status_color = "warning";
+													$status_name = "Архивирован";
+												} elseif ($status == "archived") {
+													$status_color = "danger";
+													$status_name = "Черновик";
+												}
         									?>
                                             <tr>
                                                 <td><?= $title?></td>
                                                 <td><?= $date?></td>
-                                                <td><span class="badge light 
-                                                	<?php 
-                                                	if ($status == "published") {
-                                                		echo "badge-success";
-                                                	} elseif ($status == "draft") {
-                                                		echo "badge-warning";
-                                                	} elseif ($status == "archived") {
-                                                		echo "badge-danger";
-                                                	} ?>
-                                                	"><?= $status?></span></td>
+                                                <td><span class="badge light badge-<?=$status_color?>"><?=$status_name?></span></td>
                                                 <td>
 													<div class="dropdown">
-														<button type="button" class="btn 
-														<?php 
-                                                			if ($status == "published") {
-                                                				echo "btn-success";
-                                                			} elseif ($status == "draft") {
-                                                				echo "btn-warning";
-                                                			} elseif ($status == "archived") {
-                                                				echo "btn-danger";
-                                                			} ?>
-														light sharp" data-bs-toggle="dropdown">
+														<button type="button" class="btn btn-<?=$status_color?> light sharp" data-bs-toggle="dropdown">
 															<svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg>
 														</button>
 														<div class="dropdown-menu">
