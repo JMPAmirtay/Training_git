@@ -1,6 +1,7 @@
 <?php 
   // Подключение к базе данных
   require_once 'config/connect.php';
+  $facultyinfo_id = $_GET['id'];
 ?>
 
 
@@ -119,16 +120,53 @@
         ***********************************-->
 		<div class="content-body">
             <div class="container-fluid">
-                <div class="row"><div class="row">
-                    <div class="col-xl-6 col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">О факультете</h4>
+                            </div>
+                            <div class="card-body">
                                     <div class="basic-form">
                                         <form>
                                             <select class="default-select form-control wide mb-3">
+                                                <?php
+                                                    $facultyinfo = mysqli_query($connect,"SELECT `name` FROM `faculty_main` WHERE `faculty_main`.`fk_faculty` ='$facultyinfo_id'" );
+                                                    $facultyinfo= mysqli_fetch_all($facultyinfo);
+                                                    foreach($facultyinfo as $facultyinfo){
+                                                        $facultyinfo = current($facultyinfo);
+                                                        echo "<option>$facultyinfo</option>";
+                                                    };
+                                                ?>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <form action="vendorfaculty/update.php" class="mb-3">
+                                        <input type="hidden" name="id" value="<?= $facultyinfo_id?>">
+                                        <div class="mb-2 mx-sm-3">
+                                            <input  name="name" id="name" type="text" class="form-control" placeholder="Введите новые данные">
+                                        </div>
+                                        <button type="submit" class="btn btn-rounded btn-success">Добавить</button>
+                                        <button type="button" class="btn btn-rounded btn-warning">Редактировать</button>
+                                        <button type="button" class="btn btn-rounded btn-danger">Удалить</button>
+                                    </form>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Кафедры -->
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Кафедры</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form>
+										<select class="default-select form-control wide mb-3">
                                             <?php
-                                             $facultyinfo_id = $_GET['id'];
-                                             $facultyinfo = mysqli_query($connect,"SELECT `name` FROM `faculty_main` WHERE `faculty_main`.`fk_faculty` ='$facultyinfo_id'" );
+                                             
+                                             $facultyinfo = mysqli_query($connect,"SELECT `name` FROM `department` WHERE `department`.`fk_faculty`='$facultyinfo_id'" );
                                              $facultyinfo= mysqli_fetch_all($facultyinfo);
                                              foreach($facultyinfo as $facultyinfo){
                                                 $facultyinfo = current($facultyinfo);
@@ -136,17 +174,48 @@
                                              };
                                              
                                             ?>
-                                            </select>
-                                            
-                                        </form>
+                                        </select>
+                                    </form>
+                                </div>
+                                <form action="vendorfaculty/add.php" class="mb-3">
+                                    <input type="hidden" name="id" value="<?= $facultyinfo_id?>">
+                                    <div class="mb-2 mx-sm-3">
+                                        <input  name="name" id="name" type="text" class="form-control" placeholder="Введите новые данные">
                                     </div>
+                                    <button type="submit" class="btn btn-primary mb-2">Добавить</button>
+                                </form>
+                            </div>
+                        </div>
+					</div>
+                    <!-- Специальности -->
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Специальности</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form>
+										<select class="default-select form-control wide mb-3">
+                                            <?php
+                                             
+                                             $facultyinfo = mysqli_query($connect,"SELECT `name` FROM `specialties` WHERE `specialties`.`fk_faculty` ='$facultyinfo_id'" );
+                                             $facultyinfo= mysqli_fetch_all($facultyinfo);
+                                             foreach($facultyinfo as $facultyinfo){
+                                                $facultyinfo = current($facultyinfo);
+                                                echo "<option>$facultyinfo</option>";
+                                             };
+                                             
+                                            ?>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+					</div>
+                    
+    
+        
     <!--**********************************
         Scripts
     ***********************************-->
@@ -165,8 +234,18 @@
 
     <script src="./js/custom.min.js"></script>
 	<script src="./js/dlabnav-init.js"></script>
-	
-    
+    <script>
+    function loadDoc(url) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("demo").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", url, true);
+      xhttp.send();
+    }
+    </script>
 	
 </body>
 </html>
