@@ -1,7 +1,8 @@
 <?php 
     require_once '../config/connect.php';
-    $name = $_GET['name'];
-    $id = $_GET['id'];
+    $name = $_POST['name'];
+    $id = $_POST['id'];
+    $bd = $_POST['bd'];
     if($name == ""){
         
         $host  = $_SERVER['HTTP_HOST'];
@@ -9,7 +10,7 @@
 	    header("Location: http://$host$uri/$extra");
 
     } else {
-        $department = mysqli_query($connect, "INSERT INTO `department` (`id`, `name`, `fk_faculty`) VALUES (NULL, '$name', '$id')");
+        $department = mysqli_query($connect, "INSERT INTO `$bd` (`id`, `name`, `fk_faculty`) VALUES (NULL, '$name', '$id')");
 
     }
     	/* Перенаправление браузера на другую страницу в той же директории, что и
