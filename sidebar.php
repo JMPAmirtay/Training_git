@@ -21,6 +21,7 @@
               ?>
             </ul>
           </li>
+          <li><a href="nbrk.php">Курс Валют</a></li>
       </li>
     </ul>
   </div>
