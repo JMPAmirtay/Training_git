@@ -21,6 +21,7 @@ require_once 'config/connect.php';
 	<link rel="stylesheet" href="./vendor/nouislider/nouislider.min.css" />
 	<!-- Style css -->
 	<link href="./css/style.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -104,7 +105,9 @@ require_once 'config/connect.php';
 												'ноября',
 												'декабря'
 											];
-											foreach ($news as $arqument) {
+											// foreach ($news as $arqument) {
+											for ($listIdNews = 0; $listIdNews < count($news) and $listIdNews < 2; $listIdNews++) {
+												$arqument = $news[$listIdNews];
 												$id = $arqument[0];
 												$title = $arqument[1];
 												$description = $arqument[2];
@@ -150,17 +153,11 @@ require_once 'config/connect.php';
 											<?php
 											}
 											?>
-											<!-- Кнопка для прогрузки новостей
+											<!-- Кнопка для прогрузки новостей -->
 											<form id="getNews" method="post" onsubmit="return false">
-												<button type="button" class="btn btn-primary position-absolute bottom-0 end-0 mx-3 my-1">Показать ещё</button>
+												<input type="hidden" name="id" id="LastNewsId" value=<?= $listIdNews ?>>
+												<input type="submit" class="btn btn-primary position-absolute bottom-0 end-0 mx-3 my-1" value="Показать ещё"></button>
 											</form>
-											<script>
-												$("document").ready(function() {
-													$("#getNews").on("submit", function() {
-
-													})
-												})
-											</script> -->
 										</tbody>
 									</table>
 								</div>
@@ -181,6 +178,30 @@ require_once 'config/connect.php';
 	<!--**********************************
         Scripts
     ***********************************-->
+
+	<script>
+		$("document").ready(function() {
+			$("#getNews").on("submit", function() {
+				let dataForm = $(this).serialize()
+				$.ajax({
+					url: '/query.php',
+					method: 'post',
+					dataType: 'html',
+					data: dataForm,
+					success: function(data) {
+						$(document).ready(function() {
+							$("table").append(data);
+
+							let id = document.getElementById('LastNewsId').value;
+							document.getElementById('LastNewsId').value = String(Number(id) + 2);
+
+							console.log(document.getElementById('LastNewsId').value);
+						})
+					}
+				});
+			})
+		})
+	</script>
 	<!-- Required vendors -->
 	<script src="./vendor/global/global.min.js"></script>
 	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
