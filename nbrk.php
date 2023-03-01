@@ -103,11 +103,12 @@ require_once 'config/connect.php';
                                     <table class="table table-striped table-responsive-sm">
                                         <thead>
                                             <tr>
-                                                <th>Код валюты</th>
-                                                <th>Наименование валюты на русском</th>
+                                                <th>Код</th>
+                                                <th>Наименование</th>
                                                 <th>Дата</th>
                                                 <th>Числовое значение</th>
                                                 <th>Курс</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -164,6 +165,14 @@ require_once 'config/connect.php';
                                                         <td><?= $item->pubDate ?></td>
                                                         <td><?= $item->quant ?></td>
                                                         <td><?= $item->description ?></td>
+                                                        <?php
+                                                        if ($item->index == "DOWN") {
+                                                            $status = "success";
+                                                        } else {
+                                                            $status = "danger";
+                                                        }
+                                                        ?>
+                                                        <td><span class="badge badge-<?= $status ?> badge-xl"><?= $item->change ?></span></td>
                                                     </tr>
                                             <?php
                                                 }

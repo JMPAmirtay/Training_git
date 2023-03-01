@@ -123,8 +123,8 @@ $facultyinfo_id = $_GET['id'];
                                                                 </svg>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="update_faculty.php?id=<?= $faculty_page[0] ?>&facultyinfo_id=<?= $facultyinfo_id ?>&bd=faculty_main">Edit</a>
-                                                                <a class="dropdown-item" href="vendorfaculty/delete.php?id=<?= $faculty_page[0] ?>&facultyinfo_id=<?= $facultyinfo_id ?>&bd=faculty_main">Delete</a>
+                                                                <a class="dropdown-item" href="update_faculty.php?id=<?= $faculty_page[0] ?>&facultyinfo_id=<?= $facultyinfo_id ?>&bd=faculty_main">Редактировать</a>
+                                                                <a class="dropdown-item" href="vendorfaculty/delete.php?id=<?= $faculty_page[0] ?>&facultyinfo_id=<?= $facultyinfo_id ?>&bd=faculty_main">Удалить</a>
                                                             </div>
                                                         </div>
                                                     </td>
