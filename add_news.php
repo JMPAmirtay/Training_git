@@ -86,7 +86,10 @@ require_once 'config/connect.php';
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="text">Текст:</label>
-                                            <textarea class="form-control" rows="4" id="text" name="text"></textarea>
+                                            <!-- <textarea class="form-control" rows="4" id="text" name="text"></textarea> -->
+                                            <div class="card-body custom-ekeditor">
+                                                <div id="ckeditor"></div>
+                                            </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="pubdate">Дата публикации:</label>
@@ -151,6 +154,9 @@ require_once 'config/connect.php';
     <!--**********************************
         Scripts
     ***********************************-->
+    <!-- Скрипт для ckeditor -->
+    <script src="build/ckeditor.js"></script>
+
     <!-- Скрипт для растягивания textarea -->
     <script>
         var tx = document.getElementsByTagName('textarea');
