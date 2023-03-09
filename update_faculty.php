@@ -1,6 +1,10 @@
 <?php
 // Подключение к базе данных
 require_once 'config/connect.php';
+session_start();
+if (!$_SESSION['user']) {
+    header('Location: login_admin.php');
+}
 $faculty_page = $_GET['id'];
 $facultyinfo_id = $_GET['facultyinfo_id'];
 $bd = $_GET['bd'];

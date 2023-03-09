@@ -1,6 +1,10 @@
 <?php
 // Подключение к базе данных
 require_once 'config/connect.php';
+session_start();
+if (!$_SESSION['user']) {
+    header('Location: login_admin.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -86,64 +90,64 @@ require_once 'config/connect.php';
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="text">Текст:</label>
-                                            <!-- <textarea class="form-control" rows="4" id="text" name="text"></textarea> -->
-                                            <div class="card-body custom-ekeditor">
-                                                <div id="ckeditor"></div>
-                                            </div>
+                                            <textarea class="form-control" rows="4" id="text" name="text"></textarea>
+                                            <!-- <div class="card-body custom-ekeditor">
+                                                <div id="ckeditor"></div> -->
                                         </div>
-                                        <div class="mb-3 row">
-                                            <label for="pubdate">Дата публикации:</label>
-                                            <input type="date" class="datepicker-default form-control" id="pubdate" name="pubdate">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="author">Автор:</label>
-                                            <select class="default-select  form-control wide">
-                                                <?php
-                                                $redactors = mysqli_query($connect, "SELECT * FROM `redactors`");
-                                                $redactors = mysqli_fetch_all($redactors);
-                                                foreach ($redactors as $redactor) {
-                                                ?>
-                                                    <option><?= $redactor[1] ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="image">Изображение:</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">Upload</span>
-                                                <div class="form-file">
-                                                    <input type="file" class="form-file-input form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="tags">Теги:</label>
-                                            <textarea class="form-control" rows="4" id="tags" name="tags"></textarea>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="status">Статус:</label>
-                                            <select class="nice-select form-control wide" id="status" name="status">
-                                                <option value="draft">Черновик</option>
-                                                <option value="published">Опубликован</option>
-                                                <option value="archived">Архивирован</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Добавить</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
+                                <div class="mb-3 row">
+                                    <label for="pubdate">Дата публикации:</label>
+                                    <input type="date" class="datepicker-default form-control" id="pubdate" name="pubdate">
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="author">Автор:</label>
+                                    <select class="default-select  form-control wide">
+                                        <?php
+                                        $redactors = mysqli_query($connect, "SELECT * FROM `redactors`");
+                                        $redactors = mysqli_fetch_all($redactors);
+                                        foreach ($redactors as $redactor) {
+                                        ?>
+                                            <option><?= $redactor[1] ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="image">Изображение:</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Upload</span>
+                                        <div class="form-file">
+                                            <input type="file" class="form-file-input form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="tags">Теги:</label>
+                                    <textarea class="form-control" rows="4" id="tags" name="tags"></textarea>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="status">Статус:</label>
+                                    <select class="nice-select form-control wide" id="status" name="status">
+                                        <option value="draft">Черновик</option>
+                                        <option value="published">Опубликован</option>
+                                        <option value="archived">Архивирован</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Добавить</button>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--**********************************
+    </div>
+    <!--**********************************
             Content body end
         ***********************************-->
     </div>

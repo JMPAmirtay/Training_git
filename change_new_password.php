@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!$_SESSION['status']) {
+    header('Location: /');
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +14,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- PAGE TITLE HERE -->
-    <title>Admin Template</title>
+    <title>Login Admin Template</title>
 
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
@@ -28,24 +31,25 @@ session_start();
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-                                    <h4 class="text-center mb-4">Забыли пароль</h4>
-                                    <form action="vendor_register/forgot_password.php" method="POST">
+                                    <form action="vendor_register/change_password.php" method="post">
                                         <div class="mb-3">
-                                            <label><strong>Почта</strong></label>
-                                            <input type="email" name="email" class="form-control" placeholder="hello@example.com">
+                                            <input type="password" class="form-control" name="password" placeholder="Введите новый пароль">
                                         </div>
-                                        <?php
-                                        if ($_SESSION['message']) {
-                                        ?>
-                                            <div class="alert alert-warning solid alert-square "><strong>Error! </strong><?= $_SESSION['message'] ?></div>
-                                        <?php
-                                        }
-                                        unset($_SESSION['message']);
-                                        ?>
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" name="password_confirm" placeholder="Повторите новый пароль">
+                                        </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Восстановить</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Отправить</button>
                                         </div>
                                     </form>
+                                    <?php
+                                    if ($_SESSION['message']) {
+                                    ?>
+                                        <div class="alert alert-warning solid alert-square "><?= $_SESSION['message'] ?></div>
+                                    <?php
+                                    }
+                                    unset($_SESSION['message']);
+                                    ?>
                                 </div>
                             </div>
                         </div>

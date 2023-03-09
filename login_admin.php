@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['user']) {
+    header('Location: /');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -25,14 +32,14 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Войдите в свою учетную запись</h4>
-                                    <form action="index.html">
+                                    <form action="vendor_register/signin.php" method="post">
                                         <div class="mb-3">
-                                            <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" placeholder="Почта">
+                                            <label class="mb-1"><strong>Логин</strong></label>
+                                            <input type="text" class="form-control" name="login" placeholder="Введите свой логин">
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Пароль</strong></label>
-                                            <input type="password" class="form-control" placeholder="Пароль">
+                                            <input type="password" class="form-control" name="password" placeholder="Пароль">
                                         </div>
                                         <div class="row d-flex justify-content-between mt-4 mb-2">
                                             <div class="mb-3">
@@ -52,6 +59,14 @@
                                     <div class="new-account mt-3">
                                         <p>У вас нет аккаунта? <a class="text-primary" href="./page_register.php">Регистрация</a></p>
                                     </div>
+                                    <?php
+                                    if ($_SESSION['message']) {
+                                    ?>
+                                        <div class="alert alert-warning solid alert-square "><strong>Error! </strong><?= $_SESSION['message'] ?></div>
+                                    <?php
+                                    }
+                                    unset($_SESSION['message']);
+                                    ?>
                                 </div>
                             </div>
                         </div>
