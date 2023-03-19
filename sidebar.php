@@ -22,6 +22,8 @@
             </ul>
           </li>
           <li><a href="nbrk.php">Курс Валют</a></li>
+          <li><a href="position.php">Сотрудники</a>
+
       </li>
     </ul>
   </div>
